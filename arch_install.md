@@ -23,7 +23,7 @@ List all existing disks and partitions:
 $ fdisk -l  
 ```  
 
-	Create partitions:  
+Create partitions:  
 
 ```
 $ fdisk /dev/sda  
@@ -35,7 +35,7 @@ $ fdisk /dev/sda
 	/home	 	ext4	/swap  
 	/swap	   
 
-	Format partitions:  
+Format partitions:  
 
 ```
 $ mkfs.vfat /dev/sda1  
@@ -48,13 +48,13 @@ $ swapon /dev/sda4
 5. Mount partitions:  
 Root:  
 ```
-	$ mount /dev/sda2 /mnt  
+$ mount /dev/sda2 /mnt  
 ```
 	
 Boot:  
 ```
-	$ mkdir /mnt/boot  
-	$ mount /dev/sda1 /mnt/boot  
+$ mkdir /mnt/boot  
+$ mount /dev/sda1 /mnt/boot  
 ```  
 
 Home:  
