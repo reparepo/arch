@@ -6,24 +6,24 @@
 
 3. Update system clock:  
 ```  
-	$ timedatectl set-ntp true  
+$ timedatectl set-ntp true  
 ```  
 
 4. Make disk partitions:  
 	Check if UEFI is enabled:  
 ```  
-		$ ls /sys/firmware/efi/efivars  
+$ ls /sys/firmware/efi/efivars  
 ```  
 	IF the above directory doesn't exist you are either on old hardware or you have UEFI disabled  
 
 	List all existing disks and partitions:  
 ```  
-		$ fdisk -l  
+$ fdisk -l  
 ```  
 
 	Create partitions:  
 ```
-		$ fdisk /dev/sda  
+$ fdisk /dev/sda  
 ```  
 
 	For UEFI:		For non-UEFI:  
@@ -34,11 +34,11 @@
 
 	Format partitions:  
 ```
-	$ mkfs.vfat /dev/sda1  
-	$ mkfs.ext4 /dev/sda2  
-	$ mkfs.ext4 /dev/sda3  
-	$ mkswap /dev/sda4  
-	$ swapon /dev/sda4  
+$ mkfs.vfat /dev/sda1  
+$ mkfs.ext4 /dev/sda2  
+$ mkfs.ext4 /dev/sda3  
+$ mkswap /dev/sda4  
+$ swapon /dev/sda4  
 ```  
 
 5. Mount partitions:  
