@@ -1,5 +1,4 @@
----
-	ArchLinux Install
+## ArchLinux Install
 --
 
 1. Boot from install media  
