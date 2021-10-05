@@ -10,7 +10,7 @@ $ timedatectl set-ntp true
 ` 
 
 4. Make disk partitions:  
-Check if UEFI is enabled:  
+- Check if UEFI is enabled:  
 ` 
 $ ls /sys/firmware/efi/efivars  
 `  
@@ -20,18 +20,19 @@ List all existing disks and partitions:
 $ fdisk -l  
 `  
 
-Create partitions:  
+- Create partitions:  
 `
 $ fdisk /dev/sda  
 `  
-For UEFI:		 For non-UEFI:  
- /mnt/efi 512MB	vfat	/mnt		
- /mnt	 	ext4	 /home  
- /home	 	ext4	 /swap  
- /swap	   		
 
-Format partitions:  
+	| For UEFI:	 |	| For non-UEFI: |
+	| -------------- | ---- | ------------- |
+	| /mnt/efi 512MB | vfat	| /mnt	|	
+	| /mnt	 	| ext4	| /home  |
+	| /home	 	| ext4	| /swap  |
+	| /swap	   		
 
+- Format partitions:  
 `
 $ mkfs.vfat /dev/sda1  
 $ mkfs.ext4 /dev/sda2  
@@ -41,30 +42,26 @@ $ swapon /dev/sda4
 `
 
 5. Mount partitions:  
-Root:  
+- Root:  
 `
 $ mount /dev/sda2 /mnt  
 `
-	
-Boot:  
+- Boot:  
 `
 $ mkdir /mnt/boot  
 $ mount /dev/sda1 /mnt/boot  
 `
-
-Home:  
+- Home:  
 `
 $ mkdir /mnt/home  
 $ mount /dev/sda3 /mnt/home  
 `
-
-Check mounted partitions:  
+- Check mounted partitions:  
 `
 $ df
 `
 
 6. Perform the Base Installation:  
-
 `
 $ pacstrap /mnt base linux linux-firmware vim  
 `
@@ -73,14 +70,12 @@ $ pacstrap /mnt base linux linux-firmware vim
 `
 $ genfstab -U /mnt >> /mnt/etc/fstab  
 `
-
-Check:  
+- Check:  
 `
 $ cat /mnt/etc/fstab  
 `
 
 8. Change Root:  
-
 `
 $ arch-chroot /mnt  
 `
@@ -96,59 +91,51 @@ $ ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime
 $ hwclock --systohc  
 `  
 
-10. Setup Locale:  
-
+10. Setup Locale:
 `
 $ vim /etc/locale.gen
 `  
-```
-en_US.UTF-8 UTF-8  
-ru_RU.UTF-8 UTF-8  
-```  
-`	
-$ locale-gen  
-`  
-`
-$ echo LANG=en_US.UTF-8 > /etc/locale.conf
-`  
-`
-$ export LANG=en_US.UTF-8  
-`  
-
+	```
+	en_US.UTF-8 UTF-8  
+	ru_RU.UTF-8 UTF-8  
+	```  
+	`
+	$ locale-gen  
+	`  
+	`
+	$ echo LANG=en_US.UTF-8 > /etc/locale.conf
+	`  
+	`
+	$ export LANG=en_US.UTF-8  
+	`  
 11. Configure network:  
-
-`
-$ vim /etc/hostname
-`  
-```
-ArchLinuxPC  
-```  
-`
-$ vim /etc/hosts
-`  
-```
-127.0.0.1 localhost  
-::1 localhost  
-127.0.0.1 ArchLinuxPC  
-```  
-
+	`
+	$ vim /etc/hostname
+	`  
+	```
+	ArchLinuxPC  
+	```  
+	`
+	$ vim /etc/hosts
+	`  
+	```
+	127.0.0.1 localhost  
+	::1 localhost  
+	127.0.0.1 ArchLinuxPC  
+	```  
 12. Set Root password:  
-
 `
 $ passwd  
 `  
 
 13. Install GRUB:  
 For non-UEFI:  
-
 `
 $ pacman -S grub  
 $ grub-install /dev/sda  
 $ grub-mkconfig -o /boot/grub/grub.cfg  
 `  
-
 For UEFI:  
-
 `
 $ pacman -S grub efibootmgr
 `  
@@ -166,25 +153,22 @@ $ grub-mkconfig -o /boot/grub/grub.cfg
 `  
 
 14. Create user account and Home directory:  
-
 `
-$ useradd -m aj  
-$ passwd aj  
+$ useradd -m username  
+$ passwd username  
 `  
 
 15. Install sudo:  
-
 `
 $ pacman -S sudo  
 `  
 
 16. Grant user with sudo privileges:  
-
 `
 $ EDITOR=vim visudo  
 `  
 ```
-aj ALL=(ALL) ALL  
+username ALL=(ALL) ALL  
 ```  
 
 17. Install Desktop environment:  
