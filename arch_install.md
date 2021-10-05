@@ -5,15 +5,21 @@
 2. Check internet connection  
 
 3. Update system clock:  
+'''
 	$ timedatectl set-ntp true  
+'''
 
 4. Make disk partitions:  
 	Check if UEFI is enabled:  
+'''
 		$ ls /sys/firmware/efi/efivars  
+'''
 	IF the above directory doesn't exist you are either on old hardware or you have UEFI disabled  
 
 	List all existing disks and partitions:  
+'''
 		$ fdisk -l  
+'''
 
 	Create partitions:  
 		$ fdisk /dev/sda  
