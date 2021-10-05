@@ -24,6 +24,7 @@ $ fdisk -l
 ```  
 
 	Create partitions:  
+
 ```
 $ fdisk /dev/sda  
 ```  
@@ -35,6 +36,7 @@ $ fdisk /dev/sda
 	/swap	   
 
 	Format partitions:  
+
 ```
 $ mkfs.vfat /dev/sda1  
 $ mkfs.ext4 /dev/sda2  
@@ -44,93 +46,144 @@ $ swapon /dev/sda4
 ```  
 
 5. Mount partitions:  
-	Root:  
+Root:  
+```
 	$ mount /dev/sda2 /mnt  
+```
 	
-	Boot:  
+Boot:  
+```
 	$ mkdir /mnt/boot  
 	$ mount /dev/sda1 /mnt/boot  
+```  
 
-	Home:  
-	$ mkdir /mnt/home  
-	$ mount /dev/sda3 /mnt/home  
+Home:  
+```
+$ mkdir /mnt/home  
+$ mount /dev/sda3 /mnt/home  
+```
 
-	Check mounted partitions:  
-	$ df  
+Check mounted partitions:  
+```
+$ df
+```
 
 6. Perform the Base Installation:  
-	$ pacstrap /mnt base linux linux-firmware vim  
+
+```
+$ pacstrap /mnt base linux linux-firmware vim  
+```
 
 7. Generate UUIDs:  
-	$ genfstab -U /mnt >> /mnt/etc/fstab  
+```
+$ genfstab -U /mnt >> /mnt/etc/fstab  
+```
 
-	Check:  
-	$ cat /mnt/etc/fstab  
+Check:  
+```
+$ cat /mnt/etc/fstab  
+```
 
 8. Change Root:  
-	$ arch-chroot /mnt  
+
+```
+$ arch-chroot /mnt  
+```
 
 9. Set the Timezone:  
-	$ timedatectl list-timezones  
-	$ ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime  
-	$ hwclock --systohc  
+```
+$ timedatectl list-timezones  
+$ ln -sf /usr/share/zoneinfo/Europe/Helsinki /etc/localtime  
+$ hwclock --systohc  
+```
 
 10. Setup Locale:  
-	$ vim /etc/locale.gen  
-		en_US.UTF-8 UTF-8  
-		ru_RU.UTF-8 UTF-8  
 
-	$ locale-gen  
+```
+$ vim /etc/locale.gen  
+	en_US.UTF-8 UTF-8  
+	ru_RU.UTF-8 UTF-8  
 
-	$ echo LANG=en_US.UTF-8 > /etc/locale.conf  
-	$ export LANG=en_US.UTF-8  
+$ locale-gen  
+
+$ echo LANG=en_US.UTF-8 > /etc/locale.conf  
+$ export LANG=en_US.UTF-8  
+```
 
 11. Configure network:  
-	$ vim /etc/hostname  
-		ArchLinuxPC  
 
-	$ vim /etc/hosts  
-		127.0.0.1 localhost  
-		::1 localhost  
-		127.0.0.1 ArchLinuxPC  
+```
+$ vim /etc/hostname  
+	ArchLinuxPC  
+
+$ vim /etc/hosts  
+	127.0.0.1 localhost  
+	::1 localhost  
+	127.0.0.1 ArchLinuxPC  
+```
 
 12. Set Root password:  
-	$ passwd  
+
+```
+$ passwd  
+```
 
 13. Install GRUB:  
-	For non-UEFI:  
-		$ pacman -S grub  
-		$ grub-install /dev/sda  
-		$ grub-mkconfig -o /boot/grub/grub.cfg  
+For non-UEFI:  
 
-	For UEFI:  
-		$ pacman -S grub efibootmgr  
-		$ mkdir /boot/efi  
-		$ mount /dev/sda1 /boot/efi  
-		$ grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi  
-		$ grub-mkconfig -o /boot/grub/grub.cfg  
+```
+$ pacman -S grub  
+$ grub-install /dev/sda  
+$ grub-mkconfig -o /boot/grub/grub.cfg  
+```
+
+For UEFI:  
+
+```
+$ pacman -S grub efibootmgr  
+$ mkdir /boot/efi  
+$ mount /dev/sda1 /boot/efi  
+$ grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi  
+$ grub-mkconfig -o /boot/grub/grub.cfg  
+```
 
 14. Create user account and Home directory:  
-	$ useradd -m aj  
-	$ passwd aj  
+
+```
+$ useradd -m aj  
+$ passwd aj  
+```
 
 15. Install sudo:  
-	$ pacman -S sudo  
+
+```
+$ pacman -S sudo  
+```
 
 16. Grant user with sudo privileges:  
-	$ EDITOR=vim visudo  
-		aj ALL=(ALL) ALL  
+
+```
+$ EDITOR=vim visudo  
+	aj ALL=(ALL) ALL  
+```
 
 17. Install Desktop environment:  
-	GNOME:  
-		$ pacman -S xorg  
-		$ pacman -S gnome  
-		$ pacman -S gnome-tweaks  
-		$ pacman -S networkmanager  
-		$ systemctl enable gdm.service  
-		$ systemctl enable NetworkManager.service  
+GNOME:  
+```
+$ pacman -S xorg  
+$ pacman -S gnome  
+$ pacman -S gnome-tweaks  
+$ pacman -S networkmanager  
+$ systemctl enable gdm.service  
+$ systemctl enable NetworkManager.service  
+```
 
 18. Exit and shutdown:  
-	$ exit  
-	$ shutdown now  
+
+```
+$ exit  
+$ shutdown now  
+```
+
+
 
