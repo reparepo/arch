@@ -189,23 +189,28 @@ aj ALL=(ALL) ALL
 
 17. Install Desktop environment:  
 `
-GNOME:  
+$ pacman -S xorg
 `  
 `
-$ pacman -S xorg  
 $ pacman -S gnome  
-$ pacman -S gnome-tweaks  
-$ pacman -S networkmanager  
-$ systemctl enable gdm.service  
-$ systemctl enable NetworkManager.service  
+`  
+`
+$ pacman -S gnome-tweaks
+`  
+`
+$ pacman -S networkmanager
+`  
+`
+$ systemctl enable gdm.service
+`  
+`
+$ systemctl enable NetworkManager.service
 `  
 
 18. Exit and shutdown:  
-
 `
-$ exit  
+$ exit
+`  
+`
 $ shutdown now  
 `  
-
-
-
