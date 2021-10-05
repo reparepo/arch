@@ -79,7 +79,7 @@ $ pacstrap /mnt base linux linux-firmware vim
 $ genfstab -U /mnt >> /mnt/etc/fstab  
 ```
 
-Check:  
+	Check:  
 ```
 $ cat /mnt/etc/fstab  
 ```
@@ -115,7 +115,8 @@ $ export LANG=en_US.UTF-8
 ```
 $ vim /etc/hostname  
 	ArchLinuxPC  
-
+```  
+```  
 $ vim /etc/hosts  
 	127.0.0.1 localhost  
 	::1 localhost  
