@@ -79,7 +79,7 @@ $ pacstrap /mnt base linux linux-firmware vim
 $ genfstab -U /mnt >> /mnt/etc/fstab  
 ```
 
-	Check:  
+Check:  
 ```
 $ cat /mnt/etc/fstab  
 ```
