@@ -14,9 +14,11 @@ $ timedatectl set-ntp true
 ```  
 $ ls /sys/firmware/efi/efivars  
 ```  
-	IF the above directory doesn't exist you are either on old hardware or you have UEFI disabled  
 
-	List all existing disks and partitions:  
+IF the above directory doesn't exist you are either on old hardware or you have UEFI disabled  
+
+List all existing disks and partitions:  
+
 ```  
 $ fdisk -l  
 ```  
