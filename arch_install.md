@@ -10,7 +10,7 @@ $ timedatectl set-ntp true
 ```  
 
 4. Make disk partitions:  
-	Check if UEFI is enabled:  
+Check if UEFI is enabled:  
 ```  
 $ ls /sys/firmware/efi/efivars  
 ```  
@@ -27,14 +27,14 @@ Create partitions:
 
 ```
 $ fdisk /dev/sda  
-```  
+	 
 
-	For UEFI:		For non-UEFI:  
-	/mnt/efi 512MB	vfat	/mnt		
-	/mnt	 	ext4	/home  
-	/home	 	ext4	/swap  
-	/swap	   
-
+For UEFI:		For non-UEFI:  
+/mnt/efi 512MB	vfat	/mnt		
+/mnt	 	ext4	/home  
+/home	 	ext4	/swap  
+/swap	   
+```
 Format partitions:  
 
 ```
